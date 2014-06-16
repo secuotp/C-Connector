@@ -7,7 +7,7 @@ using System.Collections;
 
 namespace C_Connection
 {
-    class XMLParameter
+    public class XMLParameter
     {
         private ArrayList keylist;
         private ArrayList valuelist;
