@@ -36,7 +36,9 @@ namespace C_Connection
                     valueString[1] = i;
                 pointer++;
                 return valueString;
-            }catch(IndexOutOfRangeException e){
+            }
+            catch (IndexOutOfRangeException e)
+            {
                 System.Console.WriteLine(e.ToString());
             }
             return null;
@@ -52,7 +54,9 @@ namespace C_Connection
                 foreach (String i in valuelist.GetRange(pointer, 1))
                     valueString[1] = i;
                 return valueString;
-            }catch(IndexOutOfRangeException e){
+            }
+            catch (IndexOutOfRangeException e)
+            {
                 System.Console.WriteLine(e.ToString());
             }
             return null;
@@ -76,15 +80,19 @@ namespace C_Connection
         public string getValue(string key)
         {
             int p = 0;
-            while(p < keylist.Count){
+            while (p < keylist.Count)
+            {
                 string value = "";
                 foreach (String i in keylist.GetRange(p, 1))
                 {
                     value = i;
                 }
-                if(value.Equals(key)){
+                if (value.Equals(key))
+                {
                     return value;
-                }else{
+                }
+                else
+                {
                     p++;
                 }
             }
