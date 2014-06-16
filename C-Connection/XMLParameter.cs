@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
-using C_Connection;
 
 namespace C_Connection
 {
@@ -48,8 +47,10 @@ namespace C_Connection
             try
             {
                 string[] valueString = new string[2];
-                valueString[0] = keylist.GetRange(pointer,1).ToString();
-                valueString[1] = valuelist.GetRange(pointer,1).ToString();
+                foreach (String i in keylist.GetRange(pointer, 1))
+                    valueString[0] = i;
+                foreach (String i in valuelist.GetRange(pointer, 1))
+                    valueString[1] = i;
                 return valueString;
             }catch(IndexOutOfRangeException e){
                 System.Console.WriteLine(e.ToString());
@@ -72,6 +73,29 @@ namespace C_Connection
             pointer = keylist.Count;
         }
 
+        public string getValue(string key)
+        {
+            int p = 0;
+            while(p < keylist.Count){
+                string value = "";
+                foreach (String i in keylist.GetRange(p, 1))
+                {
+                    value = i;
+                }
+                if(value.Equals(key)){
+                    return value;
+                }else{
+                    p++;
+                }
+            }
+            return null;
+        }
 
+        public void clear()
+        {
+            keylist = new ArrayList();
+            valuelist = new ArrayList();
+            this.first();
+        }
     }
 }
