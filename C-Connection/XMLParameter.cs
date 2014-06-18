@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 
-namespace ConsoleApplication1
+namespace C_Connection
 {
     public class XMLParameter
     {
