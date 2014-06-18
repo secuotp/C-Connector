@@ -54,7 +54,6 @@ namespace C_Connection
             }
 
             xml.Normalize();
-
             return xml.ToString();
         }
 
