@@ -12,7 +12,7 @@ namespace C_Connection
         public static readonly string REGISTER_END_USER = "S-01";
         private static readonly string REGISTER_END_USER_NAME = "Register End-User";
 
-        public static string createRequest(string service, XMLParameter siteAuthentication, XMLParameter userInfo)
+        public string createRequest(string service, XMLParameter siteAuthentication, XMLParameter userInfo)
         {
             XmlDocument xml = new XmlDocument();
             XmlDeclaration dec = xml.CreateXmlDeclaration("1.0","UTF-8",null);
@@ -53,10 +53,10 @@ namespace C_Connection
             }
 
             xml.Normalize();
-            return xml.ToString();
+            return xml.OuterXml;
         }
 
-        private static string getServiceName(string service)
+        private string getServiceName(string service)
         {
             if (service.Equals(REGISTER_END_USER))
             {
