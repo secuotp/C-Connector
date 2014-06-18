@@ -40,7 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="XMLParameter.cs" />
-    <Compile Include="connection.cs" />
+    <Compile Include="XMLDocCreate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
