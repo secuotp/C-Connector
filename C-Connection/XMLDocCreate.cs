@@ -31,7 +31,7 @@ namespace C_Connection
             XmlElement authenticationNode = xml.CreateElement(string.Empty, "authentication", string.Empty);
             rootNode.AppendChild(authenticationNode);
 
-            while (userInfo.hasNext())
+            while (siteAuthentication.hasNext())
             {
                 string[] text = siteAuthentication.pop();
                 XmlElement node = xml.CreateElement(string.Empty, text[0] , string.Empty);
@@ -45,7 +45,7 @@ namespace C_Connection
 
             while (userInfo.hasNext())
             {
-                string[] text = siteAuthentication.pop();
+                string[] text = userInfo.pop();
                 XmlElement node = xml.CreateElement(string.Empty, text[0], string.Empty);
                 XmlText value = xml.CreateTextNode(text[1]);
                 parameterNode.AppendChild(node);
