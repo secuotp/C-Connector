@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 
-namespace C_Connection
+namespace ConsoleApplication1
 {
     public class XMLParameter
     {
@@ -89,7 +89,7 @@ namespace C_Connection
                 }
                 if (value.Equals(key))
                 {
-                    return value;
+                    return valuelist[p].ToString();
                 }
                 else
                 {
