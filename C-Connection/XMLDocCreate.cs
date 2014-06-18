@@ -8,7 +8,7 @@ using C_Connection;
 
 namespace C_Connection
 {
-    public class connection
+    public class XMLDocCreate
     {
         public static readonly string REGISTER_END_USER = "S-01";
         private static readonly string REGISTER_END_USER_NAME = "Register End-User";
