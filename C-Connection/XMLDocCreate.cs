@@ -15,11 +15,11 @@ namespace C_Connection
         public string createRequest(string service, XMLParameter siteAuthentication, XMLParameter userInfo)
         {
             XmlDocument xml = new XmlDocument();
-            XmlDeclaration dec = xml.CreateXmlDeclaration("1.0","UTF-8",null);
+            XmlDeclaration dec = xml.CreateXmlDeclaration("1.0", "UTF-8", null);
             XmlElement root = xml.DocumentElement;
-            xml.InsertBefore(dec,root);
+            xml.InsertBefore(dec, root);
 
-            XmlElement rootNode = xml.CreateElement(string.Empty,"secuotp",string.Empty);
+            XmlElement rootNode = xml.CreateElement(string.Empty, "secuotp", string.Empty);
             xml.AppendChild(rootNode);
 
             XmlElement serviceNode = xml.CreateElement(string.Empty, "service", string.Empty);
@@ -34,10 +34,10 @@ namespace C_Connection
             while (siteAuthentication.hasNext())
             {
                 string[] text = siteAuthentication.pop();
-                XmlElement node = xml.CreateElement(string.Empty, text[0] , string.Empty);
+                XmlElement node = xml.CreateElement(string.Empty, text[0], string.Empty);
                 XmlText value = xml.CreateTextNode(text[1]);
                 authenticationNode.AppendChild(node);
-                authenticationNode.AppendChild(value);
+                node.AppendChild(value);
             }
 
             XmlElement parameterNode = xml.CreateElement(string.Empty, "parameter", string.Empty);
@@ -49,7 +49,7 @@ namespace C_Connection
                 XmlElement node = xml.CreateElement(string.Empty, text[0], string.Empty);
                 XmlText value = xml.CreateTextNode(text[1]);
                 parameterNode.AppendChild(node);
-                parameterNode.AppendChild(value);
+                node.AppendChild(value);
             }
 
             xml.Normalize();
