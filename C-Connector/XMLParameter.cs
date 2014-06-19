@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 
-namespace C_Connection
+namespace C_Connector
 {
     public class XMLParameter
     {
