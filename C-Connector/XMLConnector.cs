@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Linq;
 using System.Text;
 using System.Xml;
@@ -16,8 +15,7 @@ namespace C_Connector
             XmlDocument xmld = new XmlDocument();
             xmld.LoadXml(string.Format("<root>{0}</root>",xml));
 
-            WebRequest req = null;
-
+            System.Console.WriteLine(xmld);
         }
     }
 }
