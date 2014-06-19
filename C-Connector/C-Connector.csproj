@@ -7,8 +7,8 @@
     <ProjectGuid>{543B6E97-1063-4F32-90BB-A9B1DEE5BB4C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>C_Connection</RootNamespace>
-    <AssemblyName>C-Connection</AssemblyName>
+    <RootNamespace>C_Connector</RootNamespace>
+    <AssemblyName>C-Connector</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
