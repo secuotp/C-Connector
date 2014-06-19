@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace C_Connector
 {
-    class XMLConnector
+    public class XMLConnector
     {
 
         public static void connector(string xml)
