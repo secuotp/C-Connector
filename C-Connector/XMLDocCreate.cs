@@ -9,7 +9,7 @@ namespace C_Connector
 {
     public class XMLDocCreate
     {
-        public static readonly string REGISTER_END_USER = "S-01";
+        public static readonly string REGISTER_END_USER = "M-01";
         private static readonly string REGISTER_END_USER_NAME = "Register End-User";
 
         public string createRequest(string service, XMLParameter siteAuthentication, XMLParameter userInfo)

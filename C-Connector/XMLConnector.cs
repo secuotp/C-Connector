@@ -25,9 +25,10 @@ namespace C_Connector
             sw.Write(data, 0, data.Length);
             sw.Close();
 
-            req.GetResponse();
-            
-            return req.ToString();
+            HttpWebResponse res = (HttpWebResponse)req.GetResponse();
+            StreamReader sr = new StreamReader(res.GetResponseStream());
+
+            return sr.ReadToEnd().ToString();
         }
     }
 }
