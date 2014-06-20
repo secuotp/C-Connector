@@ -13,16 +13,18 @@ namespace C_Connector
     {
         public string connector(string xml)
         {
-            string uri = "http://secuotp.sit.kmutt.ac.th/SecuOTP-Service/manage/register/end-user";
+            string uri = "http://localhost:8080/Secuotp-WebService/manage/register/end-user";
             HttpWebRequest req = HttpWebRequest.Create(uri) as HttpWebRequest;
             req.Method = "POST";
-            req.ContentType = "text/xml";
-            req.ContentLength = 0;
+            req.ContentType = "application/xml";
+            String send = "request=" + xml;
+            byte[] data = Encoding.Default.GetBytes(send);
+            req.ContentLength = data.Length;
 
-            String data = "request=" + xml;
+            Stream sw = req.GetRequestStream();
+            sw.Write(data, 0, data.Length);
+            sw.Close();
 
-            StreamWriter sw = new StreamWriter(req.GetRequestStream());
-            sw.WriteLine(data);
             req.GetResponse();
             
             return req.ToString();
