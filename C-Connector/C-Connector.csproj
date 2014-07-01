@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Get.cs" />
     <Compile Include="Connector.cs" />
     <Compile Include="XMLParameter.cs" />
     <Compile Include="CreateXML.cs" />
