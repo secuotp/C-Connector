@@ -49,9 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="XMLConnector.cs" />
+    <Compile Include="Connector.cs" />
     <Compile Include="XMLParameter.cs" />
-    <Compile Include="XMLDocCreate.cs" />
+    <Compile Include="CreateXML.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

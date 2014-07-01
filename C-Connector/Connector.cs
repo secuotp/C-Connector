@@ -9,11 +9,11 @@ using System.IO;
 
 namespace C_Connector
 {
-    public class XMLConnector
+    public class Connector
     {
-        public string connector(string xml)
+        public string connector(string xml, string url)
         {
-            string uri = "http://localhost:8080/Secuotp-WebService/manage/register/end-user";
+            string uri = url;
             HttpWebRequest req = HttpWebRequest.Create(uri) as HttpWebRequest;
             req.Method = "POST";
             req.ContentType = "application/xml";
