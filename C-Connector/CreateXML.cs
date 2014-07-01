@@ -41,7 +41,7 @@ namespace C_Connector
         private static readonly string PUT_END_USER_DATA_NAME = "Set End-User Data";
         private static readonly string PUT_END_USER_DATA_URI = "http://secuotp.sit.kmutt.ac.th/SecuOTP-Service/manage/put/end-user";
         
-        public void createRequest(string service, XMLParameter siteAuthentication, XMLParameter info)
+        public string createRequest(string service, XMLParameter siteAuthentication, XMLParameter info)
         {
             string uri = "";
             Connector con = new Connector();
@@ -86,8 +86,9 @@ namespace C_Connector
             xml.Normalize();
 
             uri = getServiceUri(service);
+            string result = con.connector(xml.OuterXml,uri);
 
-            con.connector(xml.OuterXml,uri);
+            return result;
         }
 
         private string getServiceName(string service)
