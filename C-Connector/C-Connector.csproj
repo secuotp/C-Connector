@@ -51,15 +51,9 @@
   <ItemGroup>
     <Compile Include="Set.cs" />
     <Compile Include="Get.cs" />
-    <Compile Include="I:\Project\Connector.cs">
-      <Link>Connector.cs</Link>
-    </Compile>
-    <Compile Include="I:\Project\XMLParameter.cs">
-      <Link>XMLParameter.cs</Link>
-    </Compile>
-    <Compile Include="I:\Project\CreateXML.cs">
-      <Link>CreateXML.cs</Link>
-    </Compile>
+    <Compile Include="Connector.cs" />
+    <Compile Include="XMLParameter.cs" />
+    <Compile Include="CreateXML.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

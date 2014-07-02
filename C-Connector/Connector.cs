@@ -11,11 +11,21 @@ namespace C_Connector
 {
     public class Connector
     {
-        public string connector(string xml, string url)
+        public string connector(string xml, string url, string service)
         {
+            string method = "";
+            
+            if(service.Equals("?")){
+                method = "GET";
+            } else if(service.Equals("U-02")){
+                method = "PUT";
+            } else {
+                method = "POST";
+            }
+
             string uri = url;
             HttpWebRequest req = HttpWebRequest.Create(uri) as HttpWebRequest;
-            req.Method = "POST";
+            req.Method = method;
             req.ContentType = "application/xml";
             String send = "request=" + xml;
             byte[] data = Encoding.Default.GetBytes(send);
