@@ -15,7 +15,7 @@ namespace C_Connector
 
                 XMLParameter authen = new XMLParameter();
                 XMLParameter param = new XMLParameter();
-                CreateXML doc = new CreateXML();
+                XMLCreate doc = new XMLCreate();
 
                 authen.Add("domain", domain);
                 authen.Add("serial", serial);

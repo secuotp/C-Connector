@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace C_Connector
 {
-    public class CreateXML
+    public class XMLCreate
     {   
         private static readonly string REGISTER_END_USER = "M-01";
         private static readonly string REGISTER_END_USER_NAME = "Register End-User";
@@ -91,7 +91,7 @@ namespace C_Connector
             return result;
         }
 
-        private XMLParameter createRequestU02(string service, XMLParameter siteAuthentication, string username, XMLParameter changeInfo)
+        private XmlDocument createRequestU02(string service, XMLParameter siteAuthentication, string username, XMLParameter changeInfo)
         {
             string uri = "";
             Connector con = new Connector();
@@ -123,11 +123,15 @@ namespace C_Connector
 
             XmlElement parameterNode = xml.CreateElement(string.Empty, "parameter", string.Empty);
             rootNode.AppendChild(parameterNode);
-            XmlText value = xml.CreateTextNode(username);
+
+            XmlElement usernode = xml.CreateElement(string.Empty, "username", string.Empty);
+            XmlText uservalue = xml.CreateTextNode(username);
+            parameterNode.AppendChild(usernode);
+            usernode.AppendChild(uservalue);
 
             while (changeInfo.hasNext())
             {
-                string[] text = info.pop();
+                string[] text = changeInfo.pop();
                 XmlElement node = xml.CreateElement(string.Empty, text[0], string.Empty);
                 XmlText value = xml.CreateTextNode(text[1]);
                 parameterNode.AppendChild(node);
@@ -137,7 +141,7 @@ namespace C_Connector
             xml.Normalize();
 
             uri = getServiceUri(service);
-            string result = con.connector(xml.OuterXml, uri, service);
+            XmlDocument result = con.connector(xml.OuterXml, uri, service);
 
             return result;
         }
