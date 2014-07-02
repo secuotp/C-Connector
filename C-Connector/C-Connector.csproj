@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Set.cs" />
     <Compile Include="Get.cs" />
     <Compile Include="I:\Project\Connector.cs">
       <Link>Connector.cs</Link>
