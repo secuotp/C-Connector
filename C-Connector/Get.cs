@@ -29,7 +29,6 @@ namespace C_Connector
             {
                 return "Get user error. Wrong request type.";
             }
-            return null;
         }
     }
 }

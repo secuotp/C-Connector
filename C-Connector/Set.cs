@@ -8,5 +8,8 @@ namespace C_Connector
 {
     class Set
     {
+        public string createSetRequest(){
+            return null;
+        }
     }
 }
