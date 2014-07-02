@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml;
 using System.Threading.Tasks;
 
 namespace C_Connector
 {
     class Get
     {
-        public string createGetRequest(string domain, string serial, string username, string type){
+        public XmlDocument createGetRequest(string domain, string serial, string username, string type){
             if(type.Equals("full") || type.Equals("default")){
                 string service = "U-01";
 
@@ -21,13 +22,13 @@ namespace C_Connector
                 param.Add("username",username);
                 param.Add("type",type);
 
-                string result = doc.createRequest(service,authen,param);
+                XmlDocument result = doc.createRequest(service,authen,param);
 
                 return result;
             }
             else
             {
-                return "Get user error. Wrong request type.";
+                return null;
             }
         }
     }

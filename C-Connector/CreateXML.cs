@@ -41,7 +41,7 @@ namespace C_Connector
         private static readonly string PUT_END_USER_DATA_NAME = "Set End-User Data";
         private static readonly string PUT_END_USER_DATA_URI = "http://secuotp.sit.kmutt.ac.th/SecuOTP-Service/manage/put/end-user";
         
-        public string createRequest(string service, XMLParameter siteAuthentication, XMLParameter info, XMLParameter info2)
+        public XmlDocument createRequest(string service, XMLParameter siteAuthentication, XMLParameter info)
         {
             string uri = "";
             Connector con = new Connector();
@@ -86,12 +86,61 @@ namespace C_Connector
             xml.Normalize();
 
             uri = getServiceUri(service);
-            string result = con.connector(xml.OuterXml,uri,service);
+            XmlDocument result = con.connector(xml.OuterXml, uri, service);
 
             return result;
         }
 
+        private XMLParameter createRequestU02(string service, XMLParameter siteAuthentication, string username, XMLParameter changeInfo)
+        {
+            string uri = "";
+            Connector con = new Connector();
+            XmlDocument xml = new XmlDocument();
+            XmlDeclaration dec = xml.CreateXmlDeclaration("1.0", "UTF-8", null);
+            XmlElement root = xml.DocumentElement;
+            xml.InsertBefore(dec, root);
 
+            XmlElement rootNode = xml.CreateElement(string.Empty, "secuotp", string.Empty);
+            xml.AppendChild(rootNode);
+
+            XmlElement serviceNode = xml.CreateElement(string.Empty, "service", string.Empty);
+            serviceNode.SetAttribute("sid", service);
+            XmlText servicename = xml.CreateTextNode(getServiceName(service));
+            serviceNode.AppendChild(servicename);
+            rootNode.AppendChild(serviceNode);
+
+            XmlElement authenticationNode = xml.CreateElement(string.Empty, "authentication", string.Empty);
+            rootNode.AppendChild(authenticationNode);
+
+            while (siteAuthentication.hasNext())
+            {
+                string[] text = siteAuthentication.pop();
+                XmlElement node = xml.CreateElement(string.Empty, text[0], string.Empty);
+                XmlText value = xml.CreateTextNode(text[1]);
+                authenticationNode.AppendChild(node);
+                node.AppendChild(value);
+            }
+
+            XmlElement parameterNode = xml.CreateElement(string.Empty, "parameter", string.Empty);
+            rootNode.AppendChild(parameterNode);
+            XmlText value = xml.CreateTextNode(username);
+
+            while (changeInfo.hasNext())
+            {
+                string[] text = info.pop();
+                XmlElement node = xml.CreateElement(string.Empty, text[0], string.Empty);
+                XmlText value = xml.CreateTextNode(text[1]);
+                parameterNode.AppendChild(node);
+                node.AppendChild(value);
+            }
+
+            xml.Normalize();
+
+            uri = getServiceUri(service);
+            string result = con.connector(xml.OuterXml, uri, service);
+
+            return result;
+        }
 
         private string getServiceName(string service)
         {

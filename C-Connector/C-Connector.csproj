@@ -55,6 +55,7 @@
     <Compile Include="XMLParameter.cs" />
     <Compile Include="CreateXML.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XMLResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

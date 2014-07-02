@@ -11,7 +11,7 @@ namespace C_Connector
 {
     public class Connector
     {
-        public string connector(string xml, string url, string service)
+        public XmlDocument connector(string xml, string url, string service)
         {
             string method = "";
             
@@ -38,7 +38,12 @@ namespace C_Connector
             HttpWebResponse res = (HttpWebResponse)req.GetResponse();
             StreamReader sr = new StreamReader(res.GetResponseStream());
 
-            return sr.ReadToEnd().ToString();
+            string recieve = sr.ReadToEnd().ToString();
+            XmlDocument result = new XmlDocument();
+            result.LoadXml(recieve);
+            result.Normalize();
+
+            return result;
         }
     }
 }
