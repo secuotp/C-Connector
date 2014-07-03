@@ -65,13 +65,13 @@ namespace C_Connector
         {
             try
             {
-                string[] valueString = new string[2];
+                ArrayList valueString = new ArrayList();
                 foreach (String i in childNode.GetRange(pointer, 0))
                     valueString[0] = i;
                 foreach (String i in childNode.GetRange(pointer, 1))
                     valueString[1] = i;
                 pointer++;
-                return valueString;
+                new XMLTag(tagName, valueString);
             }
             catch (IndexOutOfRangeException e)
             {
@@ -88,7 +88,7 @@ namespace C_Connector
         public XMLTag addChildTag(String tagName)
         {
             this.childNode.Add(new XMLTag(tagName, new ArrayList()));
-            return childNode.IndexOf(childNode.Count - 1);
+            return new XMLTag(tagName,childNode);
         }
     }
 }

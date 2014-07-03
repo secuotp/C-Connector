@@ -57,9 +57,9 @@ namespace C_Connector
                 pointer++;
                 return new XMLTag(valueString[0],valueString[1]);
             }
-            catch (IndexOutOfRangeException e)
+            catch (IndexOutOfRangeException ex)
             {
-                System.Console.WriteLine(e.ToString());
+                System.Console.WriteLine(ex.ToString());
             }
             return null;
         }
@@ -70,17 +70,38 @@ namespace C_Connector
 
         public XMLTag addChildTag(String tagName) {
             this.paramTag.Add(new XMLTag(tagName, new ArrayList()));
-            return paramTag.IndexOf(paramTag.Count - 1);
+            paramTag.IndexOf(paramTag.Count - 1);
+            return new XMLTag(tagName,paramTag);
         }
 
         private void setParameter(XmlElement parentNode, XMLTag tag) {
-            XmlElement e = parentNode.(tag.getTagName());
+            XmlDocument xml = new XmlDocument();
+            XmlElement e = xml.CreateElement(tag.getTagName());
             if (tag.haveChildNode()) {
                 for (int i = 0; i < tag.getChildNode().Count; i++) {
-                    setParameter(e, tag.getChildNode().);
+                    try
+                    {
+                        ArrayList valueString = new ArrayList();
+                        String tagname = null;
+                        foreach (String j in paramTag.GetRange(pointer, 0))
+                        {
+                            valueString[0] = j;
+                            tagname = j;
+                        }
+                        foreach (String j in paramTag.GetRange(pointer+1, 1))
+                            valueString[1] = j;
+                        pointer++;
+                        tag = new XMLTag(tagname, valueString);
+                        setParameter(e, tag);
+                    }
+                    catch (IndexOutOfRangeException ex)
+                    {
+                        System.Console.WriteLine(ex.ToString());
+                    }
                 }
             } else {
-                e.(tag.getValue());
+                XmlText text = xml.CreateTextNode(tag.getValue());
+                e.AppendChild(text);
             }
         }
 
@@ -105,27 +126,33 @@ namespace C_Connector
             serial.AppendChild(serialnumber);
             authenNode.AppendChild(domain);
             authenNode.AppendChild(serial);
+            root.AppendChild(authenNode);
 
             XmlElement paramNode = doc.CreateElement("parameter");
             for (int i = 0; i < this.paramTag.Count; i++) {
-                string[] value;
+                XMLTag tag = null;
                 try
                 {
-                    string[] valueString = new string[2];
-                    foreach (String i in paramTag.GetRange(pointer, 0))
-                        valueString[0] = i;
-                    foreach (String i in paramTag.GetRange(pointer+1, 1))
-                        valueString[1] = i;
+                    ArrayList valueString = new ArrayList();
+                    String tagname = null;
+                    foreach (String j in paramTag.GetRange(pointer, 0))
+                    {
+                        valueString[0] = j;
+                        tagname = j;
+                    }
+                    foreach (String j in paramTag.GetRange(pointer+1, 1))
+                        valueString[1] = j;
                     pointer++;
-                    value = valueString;
+                    tag = new XMLTag(tagname, valueString);
                 }
                 catch (IndexOutOfRangeException e)
                 {
                     System.Console.WriteLine(e.ToString());
                 }
-                return null;
-                setParameter(paramNode,value.);
+                setParameter(paramNode, tag);
             }
+            root.AppendChild(paramNode);
+
             doc.Normalize();
             return doc.InnerXml;
         }
