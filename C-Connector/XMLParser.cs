@@ -15,6 +15,7 @@ namespace C_Connector
         private XmlElement e;
         public XMLParser(String xml) {
             StringBuilder output = new StringBuilder();
+            
             using(XmlReader reader = XmlReader.Create(new StringReader(xml))){
                 XmlWriterSettings ws = new XmlWriterSettings();
                 ws.Indent = true;
@@ -38,6 +39,8 @@ namespace C_Connector
                                 writer.WriteFullEndElement();
                                 break;
                         }
+                        doc = new XmlDocument();
+                        doc.LoadXml(writer.ToString());
                     }
                 }
             }
