@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace C_Connector
 {
-    class XMLReqRes
+    public class XMLReqRes
     {
         private String sid;
         private String serviceName;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace C_Connector
 {
-    class XMLTag
+    public class XMLTag
     {
         private String tagName;
         private String value;

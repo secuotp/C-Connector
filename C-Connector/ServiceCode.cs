@@ -41,7 +41,7 @@ namespace C_Connector
         private static readonly string PUT_END_USER_DATA_NAME = "Set End-User Data";
         private static readonly string PUT_END_USER_DATA_URI = "http://secuotp.sit.kmutt.ac.th/SecuOTP-Service/manage/put/end-user";
 
-        private string getServiceName(string service)
+        public static string getServiceName(string service)
         {
             if (service.Equals(REGISTER_END_USER))
             {
@@ -79,7 +79,7 @@ namespace C_Connector
             return null;
         }
 
-        private string getServiceUri(string service)
+        public static string getServiceUri(string service)
         {
             if (service.Equals(REGISTER_END_USER))
             {

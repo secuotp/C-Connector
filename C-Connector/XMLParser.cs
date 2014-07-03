@@ -8,7 +8,7 @@ using System.IO;
 
 namespace C_Connector
 {
-    class XMLParser
+    public class XMLParser
     {
         private XmlDocument doc;
         private XmlNodeList list;

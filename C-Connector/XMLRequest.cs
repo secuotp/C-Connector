@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace C_Connector
 {
-    class XMLRequest : XMLReqRes
+    public class XMLRequest : XMLReqRes
     {
         private String domainName;
         private String serialNumber;
         private ArrayList paramTag;
+        private int pointer = 0;
 
         public XMLRequest() {
             this.setSid("");
@@ -46,16 +47,30 @@ namespace C_Connector
         }
 
         public XMLTag getChildTag(int item) {
-            return paramTag.;
+            try
+            {
+                string[] valueString = new string[2];
+                foreach (String i in paramTag.GetRange(pointer, 0))
+                    valueString[0] = i;
+                foreach (String i in paramTag.GetRange(pointer+1, 1))
+                    valueString[1] = i;
+                pointer++;
+                return new XMLTag(valueString[0],valueString[1]);
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                System.Console.WriteLine(e.ToString());
+            }
+            return null;
         }
 
         public void addChildTag(String tagName, String value) {
-            this.paramTag.add(new XMLTag(tagName, value));
+            this.paramTag.Add(new XMLTag(tagName, value));
         }
 
         public XMLTag addChildTag(String tagName) {
-            this.paramTag.add(new XMLTag(tagName, new ArrayList()));
-            return paramTag.(paramTag.Count - 1);
+            this.paramTag.Add(new XMLTag(tagName, new ArrayList()));
+            return paramTag.IndexOf(paramTag.Count - 1);
         }
 
         private void setParameter(XmlElement parentNode, XMLTag tag) {
@@ -71,16 +86,45 @@ namespace C_Connector
 
         public String toString() {
             XmlDocument doc = new XmlDocument();
+
             XmlElement root = doc.CreateElement("secuotp");
-            XmlElement serviceNode = root.CreateElement("service");
+            doc.AppendChild(root);
+
+            XmlElement serviceNode = doc.CreateElement("service");
             serviceNode.SetAttribute("sid", getSid());
-            serviceNode.WriteContentTo(StringText.getServiceName(getSid()));
-            XmlElement authenNode = root.AddElement("authentication");
-            authenNode.AddElement("domain").setText(domainName);
-            authenNode.AddElement("serial").setText(serialNumber);
-            XmlElement paramNode = root.addElement("parameter");
-            for (int i = 0; i < this.paramTag.size(); i++) {
-                setParameter(paramNode, this.paramTag.get(i));
+            XmlText servicename = doc.CreateTextNode(ServiceCode.getServiceName(getSid()));
+            serviceNode.AppendChild(servicename);
+            root.AppendChild(serviceNode);
+
+            XmlElement authenNode = doc.CreateElement("authentication");
+            XmlElement domain = doc.CreateElement("domain");
+            XmlText domainname = doc.CreateTextNode(domainName);
+            XmlElement serial = doc.CreateElement("serial");
+            XmlText serialnumber = doc.CreateTextNode(serialNumber);
+            domain.AppendChild(domainname);
+            serial.AppendChild(serialnumber);
+            authenNode.AppendChild(domain);
+            authenNode.AppendChild(serial);
+
+            XmlElement paramNode = doc.CreateElement("parameter");
+            for (int i = 0; i < this.paramTag.Count; i++) {
+                string[] value;
+                try
+                {
+                    string[] valueString = new string[2];
+                    foreach (String i in paramTag.GetRange(pointer, 0))
+                        valueString[0] = i;
+                    foreach (String i in paramTag.GetRange(pointer+1, 1))
+                        valueString[1] = i;
+                    pointer++;
+                    value = valueString;
+                }
+                catch (IndexOutOfRangeException e)
+                {
+                    System.Console.WriteLine(e.ToString());
+                }
+                return null;
+                setParameter(paramNode,value.);
             }
             doc.Normalize();
             return doc.InnerXml;
