@@ -15,7 +15,7 @@ namespace C_Connector
         {
             string method = "";
             
-            if(service.Equals("?")){
+            if(service.Equals("O-02")){
                 method = "GET";
             } else if(service.Equals("U-02")){
                 method = "PUT";
