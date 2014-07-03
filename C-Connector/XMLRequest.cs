@@ -59,7 +59,7 @@ namespace C_Connector
         }
 
         private void setParameter(XmlElement parentNode, XMLTag tag) {
-            XmlElement e = parentNode.addElement(tag.getTagName());
+            XmlElement e = parentNode.(tag.getTagName());
             if (tag.haveChildNode()) {
                 for (int i = 0; i < tag.getChildNode().Count; i++) {
                     setParameter(e, tag.getChildNode().);
@@ -75,15 +75,15 @@ namespace C_Connector
             XmlElement serviceNode = root.CreateElement("service");
             serviceNode.SetAttribute("sid", getSid());
             serviceNode.WriteContentTo(StringText.getServiceName(getSid()));
-            XmlElement authenNode = root.addElement("authentication");
-            authenNode.addElement("domain").setText(domainName);
-            authenNode.addElement("serial").setText(serialNumber);
+            XmlElement authenNode = root.AddElement("authentication");
+            authenNode.AddElement("domain").setText(domainName);
+            authenNode.AddElement("serial").setText(serialNumber);
             XmlElement paramNode = root.addElement("parameter");
             for (int i = 0; i < this.paramTag.size(); i++) {
                 setParameter(paramNode, this.paramTag.get(i));
             }
-            doc.normalize();
-            return doc.asXML();
+            doc.Normalize();
+            return doc.InnerXml;
         }
     }
 }

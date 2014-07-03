@@ -87,7 +87,7 @@ namespace C_Connector
 
         public XMLTag addChildTag(String tagName)
         {
-            this.childNode.Add(new XMLTag(tagName, new ArrayList<XMLTag>()));
+            this.childNode.Add(new XMLTag(tagName, new ArrayList()));
             return childNode.IndexOf(childNode.Count - 1);
         }
     }
