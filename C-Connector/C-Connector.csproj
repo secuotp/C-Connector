@@ -49,7 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connector.cs" />
     <Compile Include="XMLParameter.cs" />
     <Compile Include="ServiceCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
