@@ -12,21 +12,21 @@ namespace C_Connector
     {
         private String domainName;
         private String serialNumber;
-        private ArrayList paramTag;
+        private List<XMLTag> paramTag;
         private int pointer = 0;
 
         public XMLRequest() {
             this.setSid("");
             domainName = "";
             serialNumber = "";
-            paramTag = new ArrayList();
+            paramTag = new List<XMLTag>();
         }
 
-        public ArrayList getParamTag() {
+        public List<XMLTag> getParamTag() {
             return paramTag;
         }
 
-        public void setParamTag(ArrayList patamTag) {
+        public void setParamTag(List<XMLTag> patamTag) {
             this.paramTag = patamTag;
         }
 
@@ -50,10 +50,10 @@ namespace C_Connector
             try
             {
                 string[] valueString = new string[2];
-                foreach (String i in paramTag.GetRange(pointer, 0))
-                    valueString[0] = i;
-                foreach (String i in paramTag.GetRange(pointer+1, 1))
-                    valueString[1] = i;
+                foreach (XMLTag i in paramTag.GetRange(pointer, 1))
+                    valueString[0] = i.ToString();
+                foreach (XMLTag i in paramTag.GetRange(pointer, 1))
+                    valueString[1] = i.ToString();
                 pointer++;
                 return new XMLTag(valueString[0],valueString[1]);
             }
@@ -70,8 +70,21 @@ namespace C_Connector
 
         public XMLTag addChildTag(String tagName) {
             this.paramTag.Add(new XMLTag(tagName, new ArrayList()));
-            paramTag.IndexOf(paramTag.Count - 1);
-            return new XMLTag(tagName,paramTag);
+            try
+            {
+                string[] valueString = new string[1];
+                foreach (XMLTag i in paramTag.GetRange(pointer, 1))
+                    valueString[0] = i.ToString();
+                foreach (XMLTag i in paramTag.GetRange(pointer, 1))
+                    valueString[1] = i.ToString();
+                pointer++;
+                return new XMLTag(valueString[0], valueString[1]);
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                System.Console.WriteLine(ex.ToString());
+            }
+            return null;
         }
 
         private void setParameter(XmlElement parentNode, XMLTag tag) {
@@ -83,13 +96,13 @@ namespace C_Connector
                     {
                         ArrayList valueString = new ArrayList();
                         String tagname = null;
-                        foreach (String j in paramTag.GetRange(pointer, 0))
+                        foreach (XMLTag j in paramTag.GetRange(pointer, 1))
                         {
-                            valueString[0] = j;
-                            tagname = j;
+                            valueString[0] = j.ToString();
+                            tagname = j.ToString();
                         }
-                        foreach (String j in paramTag.GetRange(pointer+1, 1))
-                            valueString[1] = j;
+                        foreach (XMLTag j in paramTag.GetRange(pointer, 1))
+                            valueString[1] = j.ToString();
                         pointer++;
                         tag = new XMLTag(tagname, valueString);
                         setParameter(e, tag);
@@ -135,13 +148,15 @@ namespace C_Connector
                 {
                     ArrayList valueString = new ArrayList();
                     String tagname = null;
-                    foreach (String j in paramTag.GetRange(pointer, 0))
+                    foreach (XMLTag j in paramTag.GetRange(pointer, 1))
                     {
-                        valueString[0] = j;
-                        tagname = j;
+                        valueString[0] = j.ToString();
+                        tagname = j.ToString();
                     }
-                    foreach (String k in paramTag.GetRange(pointer+1, 1))
-                        valueString[1] = k;
+
+                    foreach (XMLTag k in paramTag.GetRange(pointer, 1))
+                        valueString[1] = k.ToString();
+
                     pointer++;
                     tag = new XMLTag(tagname, valueString);
                 }
