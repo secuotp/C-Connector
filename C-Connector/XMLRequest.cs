@@ -94,17 +94,15 @@ namespace C_Connector
                 for (int i = 0; i < tag.getChildNode().Count; i++) {
                     try
                     {
-                        ArrayList valueString = new ArrayList();
-                        String tagname = null;
+                        string[] valueString = new string[2];
                         foreach (XMLTag j in paramTag.GetRange(pointer, 1))
                         {
                             valueString[0] = j.ToString();
-                            tagname = j.ToString();
                         }
                         foreach (XMLTag j in paramTag.GetRange(pointer, 1))
                             valueString[1] = j.ToString();
                         pointer++;
-                        tag = new XMLTag(tagname, valueString);
+                        tag = new XMLTag(valueString[0], valueString[1]);
                         setParameter(e, tag);
                     }
                     catch (IndexOutOfRangeException ex)
@@ -146,7 +144,7 @@ namespace C_Connector
                 XMLTag tag = null;
                 try
                 {
-                    ArrayList valueString = new ArrayList();
+                    string[] valueString = new string[2];
                     String tagname = null;
                     foreach (XMLTag j in paramTag.GetRange(pointer, 1))
                     {
@@ -158,7 +156,7 @@ namespace C_Connector
                         valueString[1] = k.ToString();
 
                     pointer++;
-                    tag = new XMLTag(tagname, valueString);
+                    tag = new XMLTag(valueString[0], valueString[1]);
                 }
                 catch (IndexOutOfRangeException e)
                 {
