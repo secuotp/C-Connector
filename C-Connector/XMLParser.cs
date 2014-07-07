@@ -21,26 +21,8 @@ namespace C_Connector
                 ws.Indent = true;
                 using(XmlWriter writer = XmlWriter.Create(output, ws)){
                     while(reader.Read()){
-                        switch(reader.NodeType){
-                            case XmlNodeType.Element:
-                                writer.WriteStartElement(reader.Name);
-                                break;
-                            case XmlNodeType.Text:
-                                writer.WriteStartElement(reader.Value);
-                                break;
-                            case XmlNodeType.XmlDeclaration:
-                            case XmlNodeType.ProcessingInstruction:
-                                writer.WriteProcessingInstruction(reader.Name,reader.Value);
-                                break;
-                            case XmlNodeType.Comment:
-                                writer.WriteComment(reader.Value);
-                                break;
-                            case XmlNodeType.EndElement:
-                                writer.WriteFullEndElement();
-                                break;
-                        }
                         doc = new XmlDocument();
-                        doc.LoadXml(writer.ToString());
+                        doc.LoadXml(reader.ToString());
                     }
                 }
             }
