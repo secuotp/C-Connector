@@ -140,8 +140,8 @@ namespace C_Connector
                         valueString[0] = j;
                         tagname = j;
                     }
-                    foreach (String j in paramTag.GetRange(pointer+1, 1))
-                        valueString[1] = j;
+                    foreach (String k in paramTag.GetRange(pointer+1, 1))
+                        valueString[1] = k;
                     pointer++;
                     tag = new XMLTag(tagname, valueString);
                 }
