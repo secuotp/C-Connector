@@ -71,7 +71,7 @@ namespace C_Connector
                 foreach (String i in childNode.GetRange(pointer, 1))
                     valueString[1] = i;
                 pointer++;
-                new XMLTag(tagName, valueString);
+                return new XMLTag(tagName, valueString);
             }
             catch (IndexOutOfRangeException e)
             {
