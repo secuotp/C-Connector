@@ -9,39 +9,39 @@ namespace C_Connector
 {
     public class XMLTag
     {
-        private String tagName;
-        private String value;
+        private string tagName;
+        private string value;
         private ArrayList childNode;
         private int pointer = 0;
 
-        public XMLTag(String tagName, String value)
+        public XMLTag(string tagName, string value)
         {
             this.tagName = tagName;
             this.value = value;
         }
 
-        public XMLTag(String tagName, ArrayList childNode)
+        public XMLTag(string tagName, ArrayList childNode)
         {
             this.tagName = tagName;
             this.childNode = childNode;
         }
 
-        public String getTagName()
+        public string getTagName()
         {
             return tagName;
         }
 
-        public void setTagName(String tagName)
+        public void setTagName(string tagName)
         {
             this.tagName = tagName;
         }
 
-        public String getValue()
+        public string getValue()
         {
             return value;
         }
 
-        public void setValue(String value)
+        public void setValue(string value)
         {
             this.value = value;
         }
@@ -66,12 +66,12 @@ namespace C_Connector
             try
             {
                 ArrayList valueString = new ArrayList();
-                foreach (String i in childNode.GetRange(pointer, 0))
+                foreach (string i in childNode.GetRange(pointer, 1))
                     valueString[0] = i;
-                foreach (String i in childNode.GetRange(pointer, 1))
+                foreach (string i in childNode.GetRange(pointer, 1))
                     valueString[1] = i;
                 pointer++;
-                return new XMLTag(tagName, valueString);
+                return new XMLTag(tagName, valueString) ;
             }
             catch (IndexOutOfRangeException e)
             {
@@ -80,12 +80,12 @@ namespace C_Connector
             return null;
         }
 
-        public void addChildTag(String tagName, String value)
+        public void addChildTag(string tagName, string value)
         {
             this.childNode.Add(new XMLTag(tagName, value));
         }
 
-        public XMLTag addChildTag(String tagName)
+        public XMLTag addChildTag(string tagName)
         {
             this.childNode.Add(new XMLTag(tagName, new ArrayList()));
             return new XMLTag(tagName,childNode);

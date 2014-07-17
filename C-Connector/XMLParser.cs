@@ -15,8 +15,8 @@ namespace C_Connector
         private XmlElement e;
 
         public XMLParser(String xml) {
-            doc = new XmlDocument();
-            doc.LoadXml(xml);
+            this.doc = new XmlDocument();
+            this.doc.LoadXml(xml);
         }
 
         public String getDataFromTag(String tagName, int numberItem) {
@@ -31,8 +31,13 @@ namespace C_Connector
     
         public static String[] getChildData(XmlNodeList nList, int numberItem) {
             String[] data = new String[2];
-            data[0] = nList.Item(numberItem).Name;
-            data[1] = nList.Item(numberItem).InnerText;
+            XmlNode node = nList.Item(0).FirstChild;
+            for (int i = 0; i < numberItem; i++)
+            {
+                node = node.NextSibling;
+            }
+            data[0] = node.LocalName;
+            data[1] = node.InnerText;
             return data;
         }
 

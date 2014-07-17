@@ -10,39 +10,39 @@ namespace C_Connector
 {
     public class XMLRequest : XMLReqRes
     {
-        private String domainName;
-        private String serialNumber;
-        private List<XMLTag> paramTag;
+        private string domainName;
+        private string serialNumber;
+        private ArrayList paramTag;
         private int pointer = 0;
 
         public XMLRequest() {
             this.setSid("");
-            domainName = "";
-            serialNumber = "";
-            paramTag = new List<XMLTag>();
+            this.domainName = "";
+            this.serialNumber = "";
+            this.paramTag = new ArrayList();
         }
 
-        public List<XMLTag> getParamTag() {
+        public ArrayList getParamTag() {
             return paramTag;
         }
 
-        public void setParamTag(List<XMLTag> patamTag) {
-            this.paramTag = patamTag;
+        public void setParamTag(ArrayList paramTag) {
+            this.paramTag = paramTag;
         }
 
-        public String getDomainName() {
+        public string getDomainName() {
             return domainName;
         }
 
-        public void setDomainName(String domainName) {
+        public void setDomainName(string domainName) {
             this.domainName = domainName;
         }
 
-        public String getSerialNumber() {
+        public string getSerialNumber() {
             return serialNumber;
         }
 
-        public void setSerialNumber(String serialNumber) {
+        public void setSerialNumber(string serialNumber) {
             this.serialNumber = serialNumber;
         }
 
@@ -50,33 +50,10 @@ namespace C_Connector
             try
             {
                 string[] valueString = new string[2];
-                foreach (XMLTag i in paramTag.GetRange(pointer, 1))
-                    valueString[0] = i.ToString();
-                foreach (XMLTag i in paramTag.GetRange(pointer, 1))
-                    valueString[1] = i.ToString();
-                pointer++;
-                return new XMLTag(valueString[0],valueString[1]);
-            }
-            catch (IndexOutOfRangeException ex)
-            {
-                System.Console.WriteLine(ex.ToString());
-            }
-            return null;
-        }
-
-        public void addChildTag(String tagName, String value) {
-            this.paramTag.Add(new XMLTag(tagName, value));
-        }
-
-        public XMLTag addChildTag(String tagName) {
-            this.paramTag.Add(new XMLTag(tagName, new ArrayList()));
-            try
-            {
-                string[] valueString = new string[1];
-                foreach (XMLTag i in paramTag.GetRange(pointer, 1))
-                    valueString[0] = i.ToString();
-                foreach (XMLTag i in paramTag.GetRange(pointer, 1))
-                    valueString[1] = i.ToString();
+                foreach (string i in paramTag.GetRange(pointer, 1))
+                    valueString[0] = i;
+                foreach (string i in paramTag.GetRange(pointer, 1))
+                    valueString[1] = i;
                 pointer++;
                 return new XMLTag(valueString[0], valueString[1]);
             }
@@ -87,36 +64,51 @@ namespace C_Connector
             return null;
         }
 
-        private void setParameter(XmlElement parentNode, XMLTag tag) {
-            XmlDocument xml = new XmlDocument();
+        public void addChildTag(string tagName, string value) {
+            this.paramTag.Add(new XMLTag(tagName, value));
+        }
+
+        public XMLTag addChildTag(string tagName) {
+            this.paramTag.Add(new XMLTag(tagName, new ArrayList()));
+            return new XMLTag(tagName,paramTag);
+        }
+
+        private void setParameter(XmlDocument doc, XmlElement parentNode, XMLTag tag) {
+            XmlDocument xml = doc;
             XmlElement e = xml.CreateElement(tag.getTagName());
-            if (tag.haveChildNode()) {
-                for (int i = 0; i < tag.getChildNode().Count; i++) {
+            System.Console.WriteLine(parentNode.ChildNodes.Count);
+            if (tag.getValue() == null) {
+                XmlElement element = null;
+                XmlText text = null;
+                for (int i = 0; i < tag.getChildNode().Count; i++)
+                {
                     try
                     {
                         string[] valueString = new string[2];
                         foreach (XMLTag j in paramTag.GetRange(pointer, 1))
-                        {
-                            valueString[0] = j.ToString();
-                        }
+                            valueString[0] = j.getTagName();
                         foreach (XMLTag j in paramTag.GetRange(pointer, 1))
-                            valueString[1] = j.ToString();
+                            valueString[1] = j.getValue();
                         pointer++;
-                        tag = new XMLTag(valueString[0], valueString[1]);
-                        setParameter(e, tag);
+                        element = doc.CreateElement(valueString[0]);
+                        text = doc.CreateTextNode(valueString[1]);
+                        element.AppendChild(text);
+                        e.AppendChild(element);
                     }
                     catch (IndexOutOfRangeException ex)
                     {
                         System.Console.WriteLine(ex.ToString());
                     }
+                    parentNode.AppendChild(e);
                 }
             } else {
                 XmlText text = xml.CreateTextNode(tag.getValue());
                 e.AppendChild(text);
+                parentNode.AppendChild(e);
             }
         }
 
-        public String toString() {
+        public string toString() {
             XmlDocument doc = new XmlDocument();
 
             XmlElement root = doc.CreateElement("secuotp");
@@ -145,16 +137,10 @@ namespace C_Connector
                 try
                 {
                     string[] valueString = new string[2];
-                    String tagname = null;
                     foreach (XMLTag j in paramTag.GetRange(pointer, 1))
-                    {
-                        valueString[0] = j.ToString();
-                        tagname = j.ToString();
-                    }
-
-                    foreach (XMLTag k in paramTag.GetRange(pointer, 1))
-                        valueString[1] = k.ToString();
-
+                        valueString[0] = j.getTagName();
+                    foreach (XMLTag j in paramTag.GetRange(pointer, 1))
+                        valueString[1] = j.getValue();
                     pointer++;
                     tag = new XMLTag(valueString[0], valueString[1]);
                 }
@@ -162,7 +148,7 @@ namespace C_Connector
                 {
                     System.Console.WriteLine(e.ToString());
                 }
-                setParameter(paramNode, tag);
+                setParameter(doc, paramNode, tag);
             }
             root.AppendChild(paramNode);
 

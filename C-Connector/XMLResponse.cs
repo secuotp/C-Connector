@@ -14,6 +14,7 @@ namespace C_Connector
 
         public XMLResponse(String xml)
         {
+            parameter = new XMLParameter();
             XMLParser parse = new XMLParser(xml);
             status = int.Parse(parse.getAttibuteFromTag("secuotp", "status", 0));
             message = parse.getDataFromTag("message", 0);
