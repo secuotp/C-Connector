@@ -73,7 +73,7 @@ namespace C_Connector
             return tag;
         }
 
-        public void addChildTag(string tagName, string value) {
+        public void addChildValue(string tagName, string value) {
             this.paramTag.Add(new XMLTag(tagName, value));
         }
 

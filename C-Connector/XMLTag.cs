@@ -80,7 +80,7 @@ namespace C_Connector
             return null;
         }
 
-        public void addChildTag(string tagName, string value)
+        public void addChildValue(string tagName, string value)
         {
             this.childNode.Add(new XMLTag(tagName, value));
         }
