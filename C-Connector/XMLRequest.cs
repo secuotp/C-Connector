@@ -8,18 +8,40 @@ using System.Threading.Tasks;
 
 namespace C_Connector
 {
-    public class XMLRequest : XMLReqRes
+    public class XMLRequest
     {
         private string domainName;
         private string serialNumber;
         private ArrayList paramTag;
         private int pointer = 0;
+        private String sid;
+        private String serviceName;
 
         public XMLRequest() {
             this.setSid("");
             this.domainName = "";
             this.serialNumber = "";
             this.paramTag = new ArrayList();
+        }
+
+        public String getSid()
+        {
+            return sid;
+        }
+
+        public void setSid(String sid)
+        {
+            this.sid = sid;
+        }
+
+        public String getServiceName()
+        {
+            return serviceName;
+        }
+
+        public void setServiceName(String serviceName)
+        {
+            this.serviceName = serviceName;
         }
 
         public ArrayList getParamTag() {
@@ -70,7 +92,6 @@ namespace C_Connector
                 {
                     try
                     {
-                        string[] valueString = new string[2];
                         XMLTag item2 = (XMLTag)item[i];
                         pointer++;
                         values = values + setParameter(item2);
