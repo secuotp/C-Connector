@@ -123,11 +123,6 @@ namespace C_Connector
             for (int i = 0; i < this.paramTag.Count; i++) {
                 try
                 {
-                    string[] valueString = new string[2];
-                    foreach (XMLTag j in paramTag.GetRange(pointer, 1))
-                        valueString[0] = j.getTagName();
-                    foreach (XMLTag j in paramTag.GetRange(pointer, 1))
-                        valueString[1] = j.getValue();
                     pointer++;
                     XMLTag tag = (XMLTag)paramTag[i];
                     param = param + setParameter(tag);
