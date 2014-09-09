@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace C_Connector
 {
-    class CertificateCheck
+    public class CertificateCheck
     {
         public static bool MyCertValidationCb(
             object sender,
