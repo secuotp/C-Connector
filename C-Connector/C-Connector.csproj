@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CertificateCheck.cs" />
     <Compile Include="ServiceCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XMLParameter.cs">
