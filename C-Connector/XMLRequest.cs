@@ -111,7 +111,7 @@ namespace C_Connector
         public string toString() {
             string xml = "<?xml version=\"1.0\"?>"+
                 "<secuotp>"+
-                    "<service sid=\""+getSid()+"\">"+ServiceCode.getServiceName(getSid())+"</service>"+
+                    "<service sid=\""+getSid()+"\">"+ServiceCodeHttps.getServiceName(getSid())+"</service>"+
                     "<authentication>"+
                         "<domain>"+domainName+"</domain>"+
                         "<serial>"+serialNumber+"</serial>"+
