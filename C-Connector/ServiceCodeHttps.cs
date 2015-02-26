@@ -9,6 +9,8 @@ namespace C_Connector
 {
     public class ServiceCodeHttps
     {   
+		/* These are values for store service code, service name and service URI. */
+		
         private static readonly string REGISTER_END_USER = "M-01";
         private static readonly string REGISTER_END_USER_NAME = "Register End-User";
         private static readonly string REGISTER_END_USER_URI = "https://secuotp.sit.kmutt.ac.th/SecuOTP-Service/manage/register/end-user";
@@ -41,6 +43,8 @@ namespace C_Connector
         private static readonly string PUT_END_USER_DATA_NAME = "Set End-User Data";
         private static readonly string PUT_END_USER_DATA_URI = "https://secuotp.sit.kmutt.ac.th/SecuOTP-Service/user/end-user";
 
+		/* Return service name from service code. */
+		
         public static string getServiceName(string service)
         {
             if (service.Equals(REGISTER_END_USER))
@@ -79,6 +83,8 @@ namespace C_Connector
             return null;
         }
 
+		/* Return service URI from service code. */
+		
         public static string getServiceUri(string service)
         {
             if (service.Equals(REGISTER_END_USER))

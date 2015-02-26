@@ -7,6 +7,8 @@ namespace C_Connector
 {
     public class Service
     {
+		/* Function for request data with POST method. */
+		
         public StreamReader httpPost(String sCode, XMLRequest req)
         {
             string uri = ServiceCode.getServiceUri(sCode);
@@ -32,6 +34,8 @@ namespace C_Connector
             }
         }
 
+		/* Function for request data with PUT method. */
+		
         public StreamReader httpPut(String sCode, XMLRequest req)
         {
             string uri = ServiceCode.getServiceUri(sCode);

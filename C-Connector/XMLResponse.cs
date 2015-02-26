@@ -11,7 +11,9 @@ namespace C_Connector
         private int status;
         private String message;
         private XMLParameter parameter;
-
+		
+		/* Constructor with XML Reader function and call every function in XMLResponse. */
+		
         public XMLResponse(String xml)
         {
             parameter = new XMLParameter();
@@ -26,32 +28,43 @@ namespace C_Connector
             }
         }
 
+		/* Return XML status value. */
+		
         public int getStatus()
         {
             return status;
         }
 
+		/* Set XML status after response form server. */
+		
         public void setStatus(int status)
         {
             this.status = status;
         }
 
+		/* Return XML message value. */
+		
         public String getMessage()
         {
             return message;
         }
 
+		/* Set XML message from server response. */
+		
         public void setMessage(String message)
         {
             this.message = message;
         }
 
-
+		/* Return XML parameter value. */
+		
         public XMLParameter getParameter()
         {
             return parameter;
         }
 
+		/* Set XML parameter from server response. */
+		
         public void setParameter(XMLParameter parameter)
         {
             this.parameter = parameter;

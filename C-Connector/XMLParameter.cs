@@ -12,20 +12,26 @@ namespace C_Connector
         private ArrayList keylist;
         private ArrayList valuelist;
         private int pointer = 0;
-
+		
+		/* Basic Constructor. */
+		
         public XMLParameter()
         {
             keylist = new ArrayList();
             valuelist = new ArrayList();
         }
 
+		/* Add XML key and value in XMLParameter. */
+		
         public void Add(string key, string value)
         {
             keylist.Add(key);
             valuelist.Add(value);
         }
-
-        public string[] pop()
+		
+		/* Get data in array to display or utilize. */
+		
+        public string[] get()
         {
             try
             {
@@ -43,7 +49,9 @@ namespace C_Connector
             }
             return null;
         }
-
+		
+		/* Get latest data in array. */
+		
         public string[] peek()
         {
             try
@@ -62,21 +70,29 @@ namespace C_Connector
             return null;
         }
 
+		/* Check the exist of next data in array. */
+		
         public Boolean hasNext()
         {
             return pointer < keylist.Count;
         }
 
+		/* Fix first number of data in all array. */
+		
         public void first()
         {
             pointer = 0;
         }
-
+		
+		/* Fix last number of data in each array. */
+		
         public void last()
         {
             pointer = keylist.Count;
         }
 
+		/* Get value (key in XML) from array. */
+		
         public string getValue(string key)
         {
             int p = 0;
@@ -98,7 +114,9 @@ namespace C_Connector
             }
             return null;
         }
-
+		
+		/* Clear every data in array. */
+		
         public void clear()
         {
             keylist = new ArrayList();
