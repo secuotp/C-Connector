@@ -7,6 +7,18 @@ namespace C_Connector
 {
     public class Service
     {
+
+        /* Validate certificate for connection to secure channel (HTTPS) 
+         * (In this case, for use with our self signed SSL.) */
+
+        public bool AcceptAllCertifications
+            (object sender, System.Security.Cryptography.X509Certificates.X509Certificate certification, 
+            System.Security.Cryptography.X509Certificates.X509Chain chain, 
+            System.Net.Security.SslPolicyErrors sslPolicyErrors)
+        {
+            return true;
+        }
+
 		/* Function for request data with POST method. */
 		
         public StreamReader httpPost(String sCode, XMLRequest req)
@@ -23,6 +35,9 @@ namespace C_Connector
             }
             else
             {
+                ServicePointManager.ServerCertificateValidationCallback = 
+                    new System.Net.Security.RemoteCertificateValidationCallback(AcceptAllCertifications);
+
                 request.Method = "POST";
                 Stream sw = request.GetRequestStream();
                 sw.Write(dataSize, 0, dataSize.Length);
@@ -50,6 +65,9 @@ namespace C_Connector
             }
             else
             {
+                ServicePointManager.ServerCertificateValidationCallback = 
+                    new System.Net.Security.RemoteCertificateValidationCallback(AcceptAllCertifications);
+
                 request.Method = "PUT";
                 Stream sw = request.GetRequestStream();
                 sw.Write(dataSize, 0, dataSize.Length);
