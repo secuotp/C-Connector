@@ -11,7 +11,7 @@ namespace C_Connector
 		
         public StreamReader httpPost(String sCode, XMLRequest req)
         {
-            string uri = ServiceCode.getServiceUri(sCode);
+            string uri = ServiceCodeHttps.getServiceUri(sCode);
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(uri);
             request.ContentType = "application/xml";
             string data = "request=" + req.toString();
@@ -38,7 +38,7 @@ namespace C_Connector
 		
         public StreamReader httpPut(String sCode, XMLRequest req)
         {
-            string uri = ServiceCode.getServiceUri(sCode);
+            string uri = ServiceCodeHttps.getServiceUri(sCode);
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(uri);
             request.ContentType = "application/xml";
             string data = "request=" + req.toString();
