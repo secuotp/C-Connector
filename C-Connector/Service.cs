@@ -2,6 +2,8 @@
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Security.Cryptography.X509Certificates;
+using System.Net.Security;
 
 namespace C_Connector
 {
@@ -12,9 +14,7 @@ namespace C_Connector
          * (In this case, for use with our self signed SSL.) */
 
         public bool AcceptAllCertifications
-            (object sender, System.Security.Cryptography.X509Certificates.X509Certificate certification, 
-            System.Security.Cryptography.X509Certificates.X509Chain chain, 
-            System.Net.Security.SslPolicyErrors sslPolicyErrors)
+            (object sender, X509Certificate certification, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
             return true;
         }
