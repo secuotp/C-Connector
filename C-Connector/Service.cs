@@ -2,25 +2,13 @@
 using System.IO;
 using System.Net;
 using System.Text;
-using System.Security.Cryptography.X509Certificates;
-using System.Net.Security;
 
 namespace C_Connector
 {
     public class Service
     {
-
-        /* Validate certificate for connection to secure channel (HTTPS) 
-         * (In this case, for use with our self signed SSL.) */
-
-        public bool AcceptAllCertifications
-            (object sender, X509Certificate certification, X509Chain chain, SslPolicyErrors sslPolicyErrors)
-        {
-            return true;
-        }
-
 		/* Function for request data with POST method. */
-		
+
         public StreamReader httpPost(String sCode, XMLRequest req)
         {
             string uri = ServiceCodeHttps.getServiceUri(sCode);
@@ -29,24 +17,15 @@ namespace C_Connector
             string data = "request=" + req.toString();
             byte[] dataSize = Encoding.Default.GetBytes(data);
             request.ContentLength = dataSize.Length;
-            if (req.getSid().Equals("U-02"))
-            {
-                return httpPut(sCode, req);
-            }
-            else
-            {
-                ServicePointManager.ServerCertificateValidationCallback = 
-                    new System.Net.Security.RemoteCertificateValidationCallback(AcceptAllCertifications);
 
-                request.Method = "POST";
-                Stream sw = request.GetRequestStream();
-                sw.Write(dataSize, 0, dataSize.Length);
-                sw.Close();
+            request.Method = "POST";
+            Stream sw = request.GetRequestStream();
+            sw.Write(dataSize, 0, dataSize.Length);
+            sw.Close();
 
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                StreamReader sr = new StreamReader(response.GetResponseStream());
-                return sr;
-            }
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            StreamReader sr = new StreamReader(response.GetResponseStream());
+            return sr;
         }
 
 		/* Function for request data with PUT method. */
@@ -59,24 +38,15 @@ namespace C_Connector
             string data = "request=" + req.toString();
             byte[] dataSize = Encoding.Default.GetBytes(data);
             request.ContentLength = dataSize.Length;
-            if (!req.getSid().Equals("U-02"))
-            {
-                return httpPost(uri, req);
-            }
-            else
-            {
-                ServicePointManager.ServerCertificateValidationCallback = 
-                    new System.Net.Security.RemoteCertificateValidationCallback(AcceptAllCertifications);
 
-                request.Method = "PUT";
-                Stream sw = request.GetRequestStream();
-                sw.Write(dataSize, 0, dataSize.Length);
-                sw.Close();
+            request.Method = "PUT";
+            Stream sw = request.GetRequestStream();
+            sw.Write(dataSize, 0, dataSize.Length);
+            sw.Close();
 
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                StreamReader sr = new StreamReader(response.GetResponseStream());
-                return sr;
-            }
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            StreamReader sr = new StreamReader(response.GetResponseStream());
+            return sr;
         }
     }
 }
