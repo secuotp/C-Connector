@@ -128,6 +128,42 @@ namespace C_Connector
             return null;
         }
 
+        public ServiceStatus migrateOTP(string username)
+        {
+            XMLRequest req = new XMLRequest();
+            req.setSid("O-01");
+            req.setDomainName(this.domain);
+            req.setSerialNumber(this.serialNumber);
+            req.setParamTag(new ArrayList());
+            req.addChildValue("username", username);
+
+
+            Service ser = new Service();
+            string res = ser.httpPost("O-01", req).ReadToEnd().ToString();
+
+            XMLResponse result = new XMLResponse(res);
+            if (result != null)
+            {
+                if (result.getParameter() != null)
+                {
+                    XMLParameter migrate = result.getParameter();
+                    OTPMigration otpmig = new OTPMigration();
+                    otpmig.setUsername(migrate.getValue("username"));
+                    otpmig.setMigration(migrate.getValue("migration-code"));
+
+                    ServiceStatus status = new ServiceStatus(result.getStatus(), result.getMessage());
+                    status.setData(otpmig);
+
+                    return status;
+                }
+                else
+                {
+                    return new ServiceStatus(result.getStatus(), result.getMessage());
+                }
+            }
+            return null;
+        }
+
         public ServiceStatus getUserData(String username, int type)
         {
             XMLRequest req = new XMLRequest();
