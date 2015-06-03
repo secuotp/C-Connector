@@ -31,7 +31,7 @@ namespace C_Connector
 
         private static readonly string TIME_SYNC = "O-02";
         private static readonly string TIME_SYNC_NAME = "Time Sync";
-        private static readonly string TIME_SYNC_URI = "https://secuotp.com/SecuOTP-Service/manage/end-user/" + DateTime.Now.Millisecond;
+        private static readonly string TIME_SYNC_URI = "https://secuotp.com/SecuOTP-Service/time/" + DateTime.Now.Millisecond;
 
         private static readonly string GET_END_USER_DATA = "U-01";
         private static readonly string GET_END_USER_DATA_NAME = "Get End-User Data";
